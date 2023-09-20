@@ -1,23 +1,21 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import About from '../pages/About'
-import Cervice from '../pages/Cervice'
-import Portfolio from '../pages/Portfolio'
-import Contact from '../pages/Contact'
-import Home from '../pages/Home'
+import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { routes } from "../utils/routes";
 
 function Main() {
   return (
-    <main className='main container'>
-        <Routes>
-            <Route path='/about' element={<About/>}/>
-            <Route path='/cervice' element={<Cervice/>}/>
-            <Route path='/portfolio' element={<Portfolio/>}/>
-            <Route path='/contact' element={<Contact/>}/>
-            <Route path='/#' element={<Home/>}/>
-        </Routes>
+    <main className="main container">
+      <Routes>
+        {routes.map((item) => {
+          return (
+            <Route key={item.id} path={item.path} element={item.element} />
+          );
+        })}
+
+        <Route path="*" element={<Navigate to="/404" replace />} />
+      </Routes>
     </main>
-  )
+  );
 }
 
-export default Main
+export default Main;

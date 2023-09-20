@@ -1,7 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Header() {
+  const links = [
+    {
+      id: 1,
+      path: "/about",
+      text: "About",
+    },
+    {
+      id: 2,
+      path: "/cervice",
+      text: "Cervice",
+    },
+    {
+      id: 3,
+      path: "/portfolio",
+      text: "Portfolio",
+    },
+    {
+      id: 4,
+      path: "/contact",
+      text: "Contact",
+    },
+  ];
+
   return (
     <header className="header">
       <div className="container">
@@ -13,18 +36,21 @@ function Header() {
           </div>
 
           <nav className="header__nav">
-            <Link className="header__link" to="/about">
-              About
-            </Link>
-            <Link className="header__link" to="/cervice">
-              Service
-            </Link>
-            <Link className="header__link" to="/portfolio">
-              Portfolio
-            </Link>
-            <Link className="header__link" to="/contact">
-              Contact
-            </Link>
+            {links.map((item) => {
+              return (
+                <NavLink
+                  key={item.id}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "header__link header__link-active"
+                      : "header__link"
+                  }
+                >
+                  {item.text}
+                </NavLink>
+              );
+            })}
           </nav>
         </div>
       </div>
